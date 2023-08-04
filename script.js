@@ -22,7 +22,6 @@ function addImageToGallery(imageURL) {
   const newImage = document.createElement("img");
   newImage.src = imageURL;
   newImage.classList.add("images");
-  newImage.classList.add("wide");
 
   document.querySelector(".gallery").insertBefore(newImage, hiddenImage);
   galleryImages = document.querySelectorAll(".gallery img"); // Update galleryImages array
