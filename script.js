@@ -1,34 +1,25 @@
-// Get the modal and the modal content
 const modal = document.querySelector(".modal");
 const modalContent = document.querySelector(".modal-content");
-
-// Get all the images in the gallery
 let galleryImages = document.querySelectorAll(".gallery img");
 const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
 const numLength = document.querySelector(".length");
-
-// Get the add button and the hidden image
 const addBtn = document.querySelector(".add-btn");
 const hiddenImage = document.querySelector(".hidden-image");
 
-// Function to add a new image to the gallery
 function addImageToGallery(imageURL) {
   const existingImage = document.querySelector(`img[src="${imageURL}"]`);
-  if (existingImage) {
-    return;
-  }
+  if (existingImage) return;
 
   const newImage = document.createElement("img");
   newImage.src = imageURL;
   newImage.classList.add("images");
 
   document.querySelector(".gallery").insertBefore(newImage, hiddenImage);
-  galleryImages = document.querySelectorAll(".gallery img"); // Update galleryImages array
+  galleryImages = document.querySelectorAll(".gallery img");
   galleryImagesArray();
 }
 
-// Handle file input change event
 addBtn.addEventListener("click", () => {
   const imageInput = document.getElementById("imageInput");
   imageInput.addEventListener("change", (event) => {
@@ -51,11 +42,8 @@ function updateImageNumber() {
 function showImage(index) {
   const numImages = galleryImages.length;
   if (numImages === 0) return;
-  if (index < 0) {
-    index = numImages - 1;
-  } else if (index >= numImages) {
-    index = 0;
-  }
+  if (index < 0) index = numImages - 1;
+  else if (index >= numImages) index = 0;
 
   modal.style.display = "flex";
   modalContent.src = galleryImages[index].src;
@@ -63,7 +51,6 @@ function showImage(index) {
   updateImageNumber();
 }
 
-// Loop through each image and add a click event listener
 const galleryImagesArray = () => {
   galleryImages.forEach((image, index) => {
     image.addEventListener("click", () => {
@@ -75,9 +62,7 @@ const galleryImagesArray = () => {
 galleryImagesArray();
 
 modal.addEventListener("click", (event) => {
-  if (event.target.classList.contains("close")) {
-    modal.style.display = "none";
-  }
+  if (event.target.classList.contains("close")) modal.style.display = "none";
 });
 
 prevBtn.addEventListener("click", () => {
@@ -93,13 +78,7 @@ nextBtn.setAttribute("tabindex", "0");
 
 document.addEventListener("keydown", (event) => {
   if (modal.style.display === "flex") {
-    // Navigate to previous image on left arrow key press
-    if (event.key === "ArrowLeft") {
-      showImage(currentImageIndex - 1);
-    }
-    // Navigate to next image on right arrow key press
-    else if (event.key === "ArrowRight") {
-      showImage(currentImageIndex + 1);
-    }
+    if (event.key === "ArrowLeft") showImage(currentImageIndex - 1);
+    else if (event.key === "ArrowRight") showImage(currentImageIndex + 1);
   }
 });
