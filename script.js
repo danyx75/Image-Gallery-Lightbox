@@ -15,7 +15,8 @@ function addImageToGallery(imageURL) {
   newImage.src = imageURL;
   newImage.classList.add("images");
 
-  document.querySelector(".gallery").insertBefore(newImage, hiddenImage);
+  const imageGallery = document.querySelector(".gallery");
+  imageGallery.insertBefore(newImage, imageGallery.length);
   galleryImages = document.querySelectorAll(".gallery img");
   galleryImagesArray();
 }
